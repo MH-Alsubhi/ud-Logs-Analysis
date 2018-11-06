@@ -79,8 +79,8 @@ def err_day():
 
 def execute_query(query):
     """
-    Helper funcation that takes an SQL query as a parameter, 
-    executes the query and returns the results as a list of tuples.
+    Helper funcation that takes an SQL query as a parameter executes the query
+    and returns the results as a list of tuples.
 
     args:
     query - (string) an SQL query statement to be executed.
