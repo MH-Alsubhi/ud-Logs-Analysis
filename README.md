@@ -4,15 +4,17 @@
 ### Introduction
 This tool coded using [python](https://www.python.org/) to:
 
- - Connect to database.
- - Execute queries.
- - Analysis results.
- - Format and print informative reports.
-### Current reports that tool provided:
+ 1. Connect to database.
+ 2. Execute queries.
+ 3. Analysis results.
+ 4. Format and print informative reports.
  
- - Display most popular three articles of all time. 
- - Show most popular article authors of all time. 
- - Report how many days did more than 1% of requests lead to errors.
+ This project sets up a mock PostgreSQL database for a fictional news website. The provided Python script uses the psycopg2 library to query the database and produce a report that answers the following three questions:
+ 
+ 1. **What are the most popular three articles of all time?**
+ 2. **Who are the most popular article authors of all time?**
+ 3. **On which days did more than 1% of requests lead to errors?**
+
 ### Requirements:
 |Requirement| Version
 |--|--|
@@ -27,17 +29,15 @@ After achieve all previous requirements:
 
  
 
- 1. Clone or direct download   [fullstack-nanodegree-vm](https://github.com/udacity/fullstack-nanodegree-vm)  repository.
- 2. Clone or direct download [ud-Logs-Analysis](https://github.com/MH-Alsubhi/ud-Logs-Analysis) repository.
+ 1. Clone or direct download [ud-Logs-Analysis](https://github.com/MH-Alsubhi/ud-Logs-Analysis) repository.
  3. Download [Data](https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip)  and extract it, you will find file called `newsdata.sql`.
  4. copy `newsdata.sql` file to [ud-Logs-Analysis](https://github.com/MH-Alsubhi/ud-Logs-Analysis) folder.
- 5. copy [ud-Logs-Analysis](https://github.com/MH-Alsubhi/ud-Logs-Analysis) folder to `\fullstack-nanodegree-vm\vagrant`
- 6. Navigate to vagrant folder that can be found in [fullstack-nanodegree-vm](https://github.com/udacity/fullstack-nanodegree-vm) folder `\fullstack-nanodegree-vm\vagrant` .
- 7. Open CLI (cmd,pwoershell,bash ..etc) in same folder to run Vagrant VM machine by using this command:
+ 5. Navigate to [ud-Logs-Analysis](https://github.com/MH-Alsubhi/ud-Logs-Analysis) folder.
+ 7. Open CLI (cmd,pwoershell,bash ..etc) in same folder to run Vagrant VM Machine by using this command:
  ```
 $ vagrant up
 ```
-You should see somting like this: 
+You should see something like this: 
 
     $ vagrant up                                                                              
     Bringing machine 'default' up with 'virtualbox' provider...                               
@@ -64,12 +64,12 @@ You should see somting like this:
     ==> default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
     ==> default: flag to force provisioning. Provisioners marked to run always will still run.
 
- 8. After that connect to VM machine using SSH by using this command:
+ 8. After that connect to VM Machine using SSH by using this command:
 
 ```
 $ vagrant ssh
 ```
-You should see somting like this: 
+You should see something like this: 
 
     $ vagrant ssh                                                    
     Welcome to Ubuntu 16.04.5 LTS (GNU/Linux 4.4.0-75-generic x86_64)
@@ -89,21 +89,22 @@ You should see somting like this:
 
                                          
 
- 9. cd to shared folder(a folder that your system and vm machine shared) which called `/vagrant`
+ 9. cd to shared folder(a folder that your system and VM Machine shared) which called `/vagrant`
     using this command:
 
 ```
 $ cd /vagrant
 ```
-
- 10. Load data from file to local database using this command:
- ```
- $ psql -d news -f newsdata.sql
-```
- 11. cd to project folder inside shared folder which called `/ud-Logs-Analysis` using this command:
+10. cd to project folder inside shared folder which called `/ud-Logs-Analysis` using this command:
  ```
  $ cd /ud-Logs-Analysis
 ```
+
+ 11. Load data from file to local database using this command:
+ ```
+ $ psql -d news -f newsdata.sql
+```
+
 12. Run `Logs-Analysis.py` file to start the tool using this command:
 ```
 $ python Logs-Analysis.py
@@ -124,3 +125,24 @@ The result based on the current data will be like this:
     Days which more than 1% of requests lead to errors:-
     July 17, 2016 - 2.26% errors 
 
+
+#### To stop VM Machine:
+
+ 1. If you still connected to VM Machine using ssh close connection by using this command:
+ ```
+$ exit
+```
+You should see something like this:
+
+    vagrant@vagrant:~$ exit
+    logout
+    Connection to 127.0.0.1 closed.
+2. then use this command to stop VM Machine:
+```
+$ vagrant halt
+```
+You should see something like this:
+~~~
+$ vagrant halt
+==> default: Attempting graceful shutdown of VM...
+~~~
