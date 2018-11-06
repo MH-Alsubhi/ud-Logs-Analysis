@@ -20,8 +20,7 @@ def top_articles():
     articles = execute_query(query)
     print('\nMost popular three articles of all time:-')
     for article in articles:
-        print(str(articles.index(article) + 1) + '- ' +
-              article[0] + ' - ' + str(article[1]) + ' Views')
+        print('{}- {} - {} Views'.format(articles.index(article) + 1,article[0],article[1]))
 
 
 def top_authors():
@@ -39,8 +38,7 @@ def top_authors():
     authors = execute_query(query)
     print('\nMost popular article authors of all time:-')
     for author in authors:
-        print(str((authors.index(author) + 1)) + '- ' +
-              author[0] + ' - ' + str(author[1]) + ' Views')
+        print('{}- {} - {} Views'.format(authors.index(author) + 1,author[0],author[1]))
 
 
 def err_day():
@@ -71,8 +69,7 @@ def err_day():
     requests = execute_query(query)
     print('\nDays which more than 1% of requests lead to errors:-')
     for request in requests:
-        print(request[0].strftime('%B %d, %Y') + ' - ' +
-              str(round(request[1], 2)) + '% errors \n')
+        print('{:%B %d, %Y} - {:.2f}% errors\n'.format(request[0], request[1]))
 
 
 def execute_query(query):
