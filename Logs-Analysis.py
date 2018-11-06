@@ -7,9 +7,8 @@ DB_NAME = 'news'
 
 def top_articles():
     """List top three articles of all times by numbers of views"""
-    db = psql.connect(database=DB_NAME)
-    c = db.cursor()
-    q = """
+
+    query = """
     SELECT title,
        COUNT(title) AS Views
     FROM articles
@@ -18,9 +17,7 @@ def top_articles():
     ORDER BY Views DESC
     LIMIT 3;
     """
-    c.execute(q)
-    articles = c.fetchall()
-    db.close()
+    articles = execute_query(query)
     print('\nMost popular three articles of all time:-')
     for article in articles:
         print(str(articles.index(article) + 1) + '- ' +
@@ -29,9 +26,8 @@ def top_articles():
 
 def top_authors():
     """List top three article authors of all time"""
-    db = psql.connect(database=DB_NAME)
-    c = db.cursor()
-    q = """
+    
+    query = """
     SELECT name,
     COUNT(title) AS Views
     FROM articles
@@ -40,9 +36,7 @@ def top_authors():
     GROUP BY name
     ORDER BY Views DESC;
     """
-    c.execute(q)
-    authors = c.fetchall()
-    db.close()
+    authors = execute_query(query)
     print('\nMost popular article authors of all time:-')
     for author in authors:
         print(str((authors.index(author) + 1)) + '- ' +
@@ -51,9 +45,8 @@ def top_authors():
 
 def err_day():
     """List days that more that 1% of requests lead to errors"""
-    db = psql.connect(database=DB_NAME)
-    c = db.cursor()
-    q = """
+
+    query = """
     WITH reqs AS(
             SELECT time::date as date,
             COUNT(*)
@@ -75,13 +68,33 @@ def err_day():
             WHERE reqs.date = errs.date
      ) SELECT * FROM err_rate WHERE err_pct > 1;
     """
-    c.execute(q)
-    requests = c.fetchall()
-    db.close()
+    requests = execute_query(query)
     print('\nDays which more than 1% of requests lead to errors:-')
     for request in requests:
         print(request[0].strftime('%B %d, %Y') + ' - ' +
               str(round(request[1], 2)) + '% errors \n')
+
+
+def execute_query(query):
+        """
+        Helper funcation that takes an SQL query as a parameter, 
+        executes the query and returns the results as a list of tuples.
+
+        args:
+        query - (string) an SQL query statement to be executed.
+
+        returns:
+        A list of tuples containing the results of the query.
+        """
+        try:
+            db = psql.connect(database=DB_NAME)
+            c = db.cursor()
+            c.execute(query)
+            results = c.fetchall()
+            db.close()
+            return results
+        except (Exception, psql.DatabaseError) as err:
+            print(err)
 
 
 if __name__ == '__main__':
