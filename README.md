@@ -30,10 +30,10 @@ After achieve all previous requirements:
  
 
  1. Clone or direct download [ud-Logs-Analysis](https://github.com/MH-Alsubhi/ud-Logs-Analysis) repository.
- 3. Download [Data](https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip)  and extract it, you will find file called `newsdata.sql`.
- 4. copy `newsdata.sql` file to [ud-Logs-Analysis](https://github.com/MH-Alsubhi/ud-Logs-Analysis) folder.
- 5. Navigate to [ud-Logs-Analysis](https://github.com/MH-Alsubhi/ud-Logs-Analysis) folder.
- 7. Open CLI (cmd,pwoershell,bash ..etc) in same folder to run Vagrant VM Machine by using this command:
+ 2. Download [Data](https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip)  and extract it, you will find file called `newsdata.sql`.
+ 3. copy `newsdata.sql` file to [ud-Logs-Analysis](https://github.com/MH-Alsubhi/ud-Logs-Analysis) folder.
+ 4. Navigate to [ud-Logs-Analysis](https://github.com/MH-Alsubhi/ud-Logs-Analysis) folder.
+ 5. Open CLI (cmd,pwoershell,bash ..etc) in same folder to run Vagrant VM Machine by using this command:
  ```
 $ vagrant up
 ```
@@ -64,7 +64,7 @@ You should see something like this:
     ==> default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
     ==> default: flag to force provisioning. Provisioners marked to run always will still run.
 
- 8. After that connect to VM Machine using SSH by using this command:
+ 6. After that connect to VM Machine using SSH by using this command:
 
 ```
 $ vagrant ssh
@@ -89,23 +89,23 @@ You should see something like this:
 
                                          
 
- 9. cd to shared folder(a folder that your system and VM Machine shared) which called `/vagrant`
+ 7. cd to shared folder(a folder that your system and VM Machine shared) which called `/vagrant`
     using this command:
 
 ```
 $ cd /vagrant
 ```
-10. cd to project folder inside shared folder which called `/ud-Logs-Analysis` using this command:
+8. cd to project folder inside shared folder which called `/ud-Logs-Analysis` using this command:
  ```
  $ cd /ud-Logs-Analysis
 ```
 
- 11. Load data from file to local database using this command:
+ 9. Load data from file to local database using this command:
  ```
  $ psql -d news -f newsdata.sql
 ```
 
-12. Run `Logs-Analysis.py` file to start the tool using this command:
+10. Run `Logs-Analysis.py` file to start the tool using this command:
 ```
 $ python Logs-Analysis.py
 ```
