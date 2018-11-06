@@ -9,36 +9,41 @@ def top_articles():
     """List top three articles of all times by numbers of views"""
 
     query = """
-    SELECT title,
-       COUNT(title) AS Views
-    FROM articles
-    JOIN log ON PATH = concat('/article/', articles.slug)
-    GROUP BY title
-    ORDER BY Views DESC
-    LIMIT 3;
+        SELECT title, views
+        FROM articles
+        INNER JOIN (
+        SELECT path, count(path) AS views
+        FROM log
+        GROUP BY log.path
+        ) AS log
+        ON log.path = '/article/' || articles.slug
+        ORDER BY views DESC
+        LIMIT 3;
     """
     articles = execute_query(query)
     print('\nMost popular three articles of all time:-')
     for article in articles:
-        print('{}- {} - {} Views'.format(articles.index(article) + 1,article[0],article[1]))
+        print('{}- {} - {} Views'.format(articles.index(article) +
+                                         1, article[0], article[1]))
 
 
 def top_authors():
     """List top three article authors of all time"""
-    
+
     query = """
-    SELECT name,
-    COUNT(title) AS Views
-    FROM articles
-    JOIN authors ON authors.id = articles.author
-    JOIN log ON PATH = concat('/article/', articles.slug)
-    GROUP BY name
-    ORDER BY Views DESC;
+        SELECT name,
+        COUNT(title) AS Views
+        FROM articles
+        JOIN authors ON authors.id = articles.author
+        JOIN log ON log.path = '/article/' || articles.slug
+        GROUP BY name
+        ORDER BY Views DESC;
     """
     authors = execute_query(query)
     print('\nMost popular article authors of all time:-')
     for author in authors:
-        print('{}- {} - {} Views'.format(authors.index(author) + 1,author[0],author[1]))
+        print('{}- {} - {} Views'.format(authors.index(author) +
+                                         1, author[0], author[1]))
 
 
 def err_day():
@@ -73,25 +78,25 @@ def err_day():
 
 
 def execute_query(query):
-        """
-        Helper funcation that takes an SQL query as a parameter, 
-        executes the query and returns the results as a list of tuples.
+    """
+    Helper funcation that takes an SQL query as a parameter, 
+    executes the query and returns the results as a list of tuples.
 
-        args:
-        query - (string) an SQL query statement to be executed.
+    args:
+    query - (string) an SQL query statement to be executed.
 
-        returns:
-        A list of tuples containing the results of the query.
-        """
-        try:
-            db = psql.connect(database=DB_NAME)
-            c = db.cursor()
-            c.execute(query)
-            results = c.fetchall()
-            db.close()
-            return results
-        except (Exception, psql.DatabaseError) as err:
-            print(err)
+    returns:
+    A list of tuples containing the results of the query.
+    """
+    try:
+        db = psql.connect(database=DB_NAME)
+        c = db.cursor()
+        c.execute(query)
+        results = c.fetchall()
+        db.close()
+        return results
+    except (Exception, psql.DatabaseError) as err:
+        print(err)
 
 
 if __name__ == '__main__':
