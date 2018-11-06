@@ -1,7 +1,7 @@
-# import python db api
+#!/usr/bin/env python
 import psycopg2 as psql
 
-# create a var for db name
+
 DB_NAME = 'news'
 
 def top_articles():
