@@ -4,7 +4,9 @@ import psycopg2 as psql
 
 DB_NAME = 'news'
 
+
 def top_articles():
+    """List top three articles of all times by numbers of views"""
     db = psql.connect(database=DB_NAME)
     c = db.cursor()
     q = """
@@ -26,6 +28,7 @@ def top_articles():
 
 
 def top_authors():
+    """List top three article authors of all time"""
     db = psql.connect(database=DB_NAME)
     c = db.cursor()
     q = """
@@ -47,6 +50,7 @@ def top_authors():
 
 
 def err_day():
+    """List days that more that 1% of requests lead to errors"""
     db = psql.connect(database=DB_NAME)
     c = db.cursor()
     q = """
@@ -78,6 +82,7 @@ def err_day():
     for request in requests:
         print(request[0].strftime('%B %d, %Y') + ' - ' +
               str(round(request[1], 2)) + '% errors \n')
+
 
 if __name__ == '__main__':
     top_articles()
