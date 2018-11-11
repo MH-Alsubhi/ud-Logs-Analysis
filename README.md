@@ -22,7 +22,7 @@ This tool coded using [python](https://www.python.org/) to:
 | Psycopg2 | [2.7.5](http://initd.org/psycopg/download/) |
 | PostgreSQL| [9.5.14](https://www.postgresql.org/download/) |
 | Vagrant| [2.2.0](https://www.vagrantup.com/downloads.html) |
-| VirtualBox| [5.1.38](https://www.vagrantup.com/downloads.html) |
+| VirtualBox| [5.1.38](https://www.virtualbox.org/wiki/Download_Old_Builds_5_1) |
 
 ### Instructions:
 After achieve all previous requirements:
