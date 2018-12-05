@@ -126,7 +126,7 @@ The result based on the current data will be like this:
     July 17, 2016 - 2.26% errors 
 
 
-#### To stop VM Machine:
+### To stop VM Machine:
 
  1. If you still connected to VM Machine using ssh close connection by using this command:
  ```
@@ -146,3 +146,8 @@ You should see something like this:
 $ vagrant halt
 ==> default: Attempting graceful shutdown of VM...
 ~~~
+
+### To restart VM Machine:
+```
+$ vagrant reload
+```
